@@ -23,6 +23,10 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+def classes_index(request):
+  return render(request, 'classes/index.html')
+  # add more here later
+
 # ________ Many-to-Many Associations __________
 
 
@@ -30,7 +34,7 @@ def about(request):
 def signup(request):
   error_message = ''
   if request.method == 'POST':
-    form = UserCreationForm(request.post)
+    form = UserCreationForm(request.POST)
     if form.is_valid():
       user = form.save()
       login(request, user)
