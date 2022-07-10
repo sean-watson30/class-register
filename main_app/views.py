@@ -73,3 +73,27 @@ class ClassDelete(DeleteView):
 
 # ________ Class Declaration CRUD Functionality / Students __________
 
+class StudentList(ListView):
+  model = Student
+  template_name = 'students/index.html'
+
+class StudentDetail(DetailView):
+  model = Student
+  template_name = 'students/detail.html'
+
+class StudentCreate(CreateView):
+  model = Student
+  fields = ['name', 'email', 'phone', 'age', 'address', 'city', 'state', 'zip']
+  success_url = '/students/'
+
+class StudentUpdate(UpdateView):
+  model = Student
+  fields = ['name', 'email', 'phone', 'age', 'address', 'city', 'state', 'zip']
+  success_url = '/students/'
+
+class StudentDelete(DeleteView):
+  model = Student
+  success_url = '/students/'
+
+# ________ Class Declaration CRUD Functionality / Instructor __________
+

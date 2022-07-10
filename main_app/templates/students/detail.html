@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Student Details</h1>
+
+<div>
+  <div>
+    <h2>{{ student.name }}</h2>
+    <ul>
+      <li>age: {{ student.age }}</li>
+      <li>email: {{ student.email }}</li>
+      <li>phone: {{ student.phone }}</li>
+    </ul>
+    <ul>
+      <li>street address: {{ student.address }}</li>
+      <li>city: {{ student.city }}</li>
+      <li>state: {{ student.state }}</li>
+      <li>zip code: {{ student.zip }}</li>
+    </ul>
+  </div>
+  <div>
+    <a href="{% url 'students_update' student.id %}">Edit</a>
+    <a href="{% url 'students_delete' student.id %}">Delete</a>
+  </div>
+</div>
+
+{% endblock %}

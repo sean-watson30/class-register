@@ -13,7 +13,11 @@ urlpatterns = [
   path('classes/<int:pk>/delete/', views.ClassDelete.as_view(), name='classes_delete'),
 
   # ________ Students _________
-
+  path('students/', views.StudentList.as_view(), name='students_index'),
+  path('students/<int:pk>', views.StudentDetail.as_view(), name='students_detail'),
+  path('students/create', views.StudentCreate.as_view(), name='students_create'),
+  path('students/<int:pk>/update', views.StudentUpdate.as_view(), name='students_update'),
+  path('students/<int:pk>/delete', views.StudentDelete.as_view(), name='students_delete'),
 
   # ________ Sign-Up _________
   path('accounts/signup/', views.signup, name='signup'),

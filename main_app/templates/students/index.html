@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Student Index</h1>
+<a href="{% url 'students_create' %}">Add a Student</a>
+
+{% for student in object_list %}
+
+<div>
+  <a href="{% url 'students_detail' student.id %}">
+    <span>{{ student.name }}</span>
+  </a>
+</div>
+
+{% endfor %}
+
+{% endblock %}
