@@ -30,13 +30,20 @@ def classes_index(request):
 
 def classes_detail(request, class_id):
   classes = Class.objects.get(id=class_id)
+  students = Student.objects.exclude(id__in=classes.students.all().values_list('id'))
   # add more here later
   return render(request, 'classes/detail.html', {
-    'class': classes
+    'class': classes, 'students': students
   })
 
 # ________ Many-to-Many Associations __________
+def assoc_student(request, class_id, student_id):
+  Class.objects.get(id=class_id).students.add(student_id)
+  return redirect('classes_detail', class_id=class_id)
 
+def assoc_student_delete(request, class_id, student_id):
+  Class.objects.get(id=class_id).students.remove(student_id)
+  return redirect('classes_detail', class_id=class_id)
 
 # ________ Sign Up Function __________
 def signup(request):

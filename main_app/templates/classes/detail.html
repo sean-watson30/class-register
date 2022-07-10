@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
+<!-- Display Class Details -->
 <h1>Class Details</h1>
 
 <div>
@@ -11,6 +12,36 @@
     <a href="{% url 'classes_update' class.id %}">Edit Class</a>
     <a href="{% url 'classes_delete' class.id %}">Delete Class</a>
   </div>
+</div>
+<!-- See / Remove Students from this Class -->
+<div>
+  <h2>Students enrolled in {{ class.title }}</h2>
+  {% if class.students.count %} {% for student in class.students.all %}
+  <div>
+    <h4>{{ student.name }}</h4>
+    <form action="{% url 'assoc_student_delete' class.id student.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit">Remove</button>
+    </form>
+  </div>
+  {% endfor %} {% else %}
+  <h4>( No Students Currently Enrolled )</h4>
+  {% endif %}
+</div>
+<!-- Add Students to this Class -->
+<div>
+  <h3>Students Not Enrolled:</h3>
+  {% if students.count %} {% for student in students.all %}
+  <div>
+    <h4>{{ student.name }}</h4>
+    <form action="{% url 'assoc_student' class.id student.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit">Add</button>
+    </form>
+  </div>
+  {% endfor %} {% else %}
+  <h4>( No Available Students )</h4>
+  {% endif %}
 </div>
 
 {% endblock %}

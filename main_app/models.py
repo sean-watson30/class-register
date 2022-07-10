@@ -15,12 +15,15 @@ class Student(models.Model):
   phone = models.CharField(max_length=12)
   age = models.CharField(max_length=2)
   address = models.CharField(max_length=250)
-  city = models.TextField(max_length=400)
+  city = models.CharField(max_length=150)
   state = models.CharField(max_length=2)
   zip = models.CharField(max_length=5)
   # classes = models.ManyToManyField(Class)
   def __str__(self):
     return f"{self.name}"
+  def get_absolute_url(self):
+    return reverse('students_detail', kwargs={'pk': self.id})
+
 
 class Class(models.Model):
   title = models.CharField(max_length=200)
@@ -32,6 +35,8 @@ class Class(models.Model):
   students = models.ManyToManyField(Student)
   def __str__(self):
     return f"{self.title}"
+  def get_absolute_url(self):
+    return reverse('classes_detail', kwargs={'pk': self.id})
 
 class Photo(models.Model):
   url = models.CharField(max_length=200)

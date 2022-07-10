@@ -12,6 +12,10 @@ urlpatterns = [
   path('classes/<int:pk>/update/', views.ClassUpdate.as_view(), name='classes_update'),
   path('classes/<int:pk>/delete/', views.ClassDelete.as_view(), name='classes_delete'),
 
+  # ________ Associated Links _________
+  path('classes/<int:class_id>/assoc_student/<int:student_id>/', views.assoc_student, name='assoc_student'),
+  path('classes/<int:class_id>/assoc_student/<int:student_id>/delete/', views.assoc_student_delete, name='assoc_student_delete'),
+
   # ________ Students _________
   path('students/', views.StudentList.as_view(), name='students_index'),
   path('students/<int:pk>', views.StudentDetail.as_view(), name='students_detail'),
