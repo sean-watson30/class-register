@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Class Details</h1>
+
+<div>
+  <h4>{{ class.title }}, Instructor: {{ class.instructor }}</h4>
+  <p>{{ class.day_of_week }}</p>
+  <p>Class Times: {{ class.start_time }}pm - {{ class.end_time }}pm</p>
+  <p>Studio: {{ class.studio }}</p>
+  <div>
+    <a href="{% url 'classes_update' class.id %}">Edit Class</a>
+    <a href="{% url 'classes_delete' class.id %}">Delete Class</a>
+  </div>
+</div>
+
+{% endblock %}

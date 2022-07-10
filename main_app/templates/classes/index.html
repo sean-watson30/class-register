@@ -1,5 +1,16 @@
 {% extends 'base.html' %} {% block content %}
 
 <h1>Classes Index Page</h1>
+<a href="{% url 'classes_create' %}">Add a Class</a>
 
-{% endblock %}
+{% for class in classes %}
+
+<div>
+  <a href="{% url 'classes_detail' class.id %}">
+    <div>
+      <h4>{{ class.title }}<span> ({{ class.day_of_week }} from {{ class.start_time }} - {{ class.end_time }} ) - {{ class.instructor }}</span></h4>
+    </div>
+  </a>
+</div>
+
+{% endfor %} {% endblock %}

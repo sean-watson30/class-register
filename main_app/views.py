@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# from .models import
+from .models import Class, Student, Photo
 
 import uuid
 import boto3
@@ -24,8 +24,16 @@ def about(request):
   return render(request, 'about.html')
 
 def classes_index(request):
-  return render(request, 'classes/index.html')
+  classes = Class.objects.all()
+  return render(request, 'classes/index.html', { 'classes': classes })
   # add more here later
+
+def classes_detail(request, class_id):
+  classes = Class.objects.get(id=class_id)
+  # add more here later
+  return render(request, 'classes/detail.html', {
+    'class': classes
+  })
 
 # ________ Many-to-Many Associations __________
 
@@ -48,8 +56,20 @@ def signup(request):
 # ________ Photo Handling __________
 
 
-# ________ Class Declaration / __________
+# ________ Class Declaration CRUD Functionality / Classes __________
+class ClassCreate(CreateView):
+  model = Class
+  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructor']
+  success_url = '/classes/'
 
+class ClassUpdate(UpdateView):
+  model = Class
+  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructor']
+  success_url = '/classes/'
 
-# ________ Class Declaration / __________
+class ClassDelete(DeleteView):
+  model = Class
+  success_url = '/classes/'
+
+# ________ Class Declaration CRUD Functionality / Students __________
 
