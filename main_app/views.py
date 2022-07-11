@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 
-from django.views.generic import ListView
+# from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic.detail import DetailView
+# from django.views.generic.detail import DetailView
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -31,12 +31,23 @@ def classes_index(request):
 def classes_detail(request, class_id):
   classes = Class.objects.get(id=class_id)
   students = Student.objects.exclude(id__in=classes.students.all().values_list('id'))
-  # add more here later
   return render(request, 'classes/detail.html', {
     'class': classes, 'students': students
   })
 
+def students_index(request):
+  students = Student.objects.all()
+  return render(request, 'students/index.html', { 'students': students })
+
+def students_detail(request, student_id):
+  student = Student.objects.get(id=student_id)
+  classes = Class.objects.exclude(id__in=student.classes.all().values_list('id'))
+  return render(request, 'students/detail.html', {
+    'student': student, 'classes': classes 
+  })
+
 # ________ Many-to-Many Associations __________
+
 def assoc_student(request, class_id, student_id):
   Class.objects.get(id=class_id).students.add(student_id)
   return redirect('classes_detail', class_id=class_id)
@@ -45,7 +56,16 @@ def assoc_student_delete(request, class_id, student_id):
   Class.objects.get(id=class_id).students.remove(student_id)
   return redirect('classes_detail', class_id=class_id)
 
+def assoc_class(request, student_id, class_id):
+  Student.objects.get(id=student_id).classes.add(class_id)
+  return redirect('students_detail', student_id=student_id)
+
+def assoc_class_delete(request, student_id, class_id):
+  Student.objects.get(id=student_id).classes.remove(class_id)
+  return redirect('students_detail', student_id=student_id)
+
 # ________ Sign Up Function __________
+
 def signup(request):
   error_message = ''
   if request.method == 'POST':
@@ -64,6 +84,7 @@ def signup(request):
 
 
 # ________ Class Declaration CRUD Functionality / Classes __________
+
 class ClassCreate(CreateView):
   model = Class
   fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructor']
@@ -79,14 +100,6 @@ class ClassDelete(DeleteView):
   success_url = '/classes/'
 
 # ________ Class Declaration CRUD Functionality / Students __________
-
-class StudentList(ListView):
-  model = Student
-  template_name = 'students/index.html'
-
-class StudentDetail(DetailView):
-  model = Student
-  template_name = 'students/detail.html'
 
 class StudentCreate(CreateView):
   model = Student

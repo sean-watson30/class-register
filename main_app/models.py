@@ -18,7 +18,6 @@ class Student(models.Model):
   city = models.CharField(max_length=150)
   state = models.CharField(max_length=2)
   zip = models.CharField(max_length=5)
-  # classes = models.ManyToManyField(Class)
   def __str__(self):
     return f"{self.name}"
   def get_absolute_url(self):
@@ -32,7 +31,7 @@ class Class(models.Model):
   start_time = models.CharField(max_length=10)
   end_time = models.CharField(max_length=10)
   instructor = models.ForeignKey(User, on_delete=models.CASCADE)
-  students = models.ManyToManyField(Student)
+  students = models.ManyToManyField(Student, related_name='classes')
   def __str__(self):
     return f"{self.title}"
   def get_absolute_url(self):
