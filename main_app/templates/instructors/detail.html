@@ -2,5 +2,14 @@
 
 <h1>Instructor Detail</h1>
 <h4>{{ instructor.name }}</h4>
+<ul>
+  <li>{{ instructor.email }}</li>
+  <li>{{ instructor.phone }}</li>
+</ul>
+
+<div>
+  <a href="{% url 'instructors_update' instructor.id %}">Edit Instructor</a>
+  <a href="{% url 'instructors_delete' instructor.id %}">Delete Instructor</a>
+</div>
 
 {% endblock %}

@@ -25,14 +25,16 @@ def about(request):
 
 def classes_index(request):
   classes = Class.objects.all()
-  return render(request, 'classes/index.html', { 'classes': classes })
+  instructor = Instructor.objects.all()
+  return render(request, 'classes/index.html', { 'classes': classes, 'instructor': instructor })
   # add more here later
 
 def classes_detail(request, class_id):
   classes = Class.objects.get(id=class_id)
   students = Student.objects.exclude(id__in=classes.students.all().values_list('id'))
+  instructor = Instructor.objects.exclude(id__in=classes.instructors.all().values_list('id'))
   return render(request, 'classes/detail.html', {
-    'class': classes, 'students': students
+    'class': classes, 'students': students, 'instructor': instructor
   })
 
 def students_index(request):
@@ -53,10 +55,10 @@ def instructors_index(request):
 
 def instructors_detail(request, instructor_id):
   instructor = Instructor.objects.get(id=instructor_id)
-  # classes = Class.objects.exclude(id__in=instructor.classes.all().values_list('id'))
+  classes = Class.objects.exclude(id__in=instructor.classes.all().values_list('id'))
   return render(request, 'instructors/detail.html', {
-    'instructor': instructor
-    # 'instructor': instructor, 'classes': classes 
+    # 'instructor': instructor
+    'instructor': instructor, 'classes': classes 
   })
 
 # ________ Many-to-Many Associations __________
@@ -77,7 +79,16 @@ def assoc_class_delete(request, student_id, class_id):
   Student.objects.get(id=student_id).classes.remove(class_id)
   return redirect('students_detail', student_id=student_id)
 
+
 # Add Instructors Associatios Here
+def assoc_instructor(request, class_id, instructor_id):
+  Class.objects.get(id=class_id).instructors.add(instructor_id)
+  return redirect('classes_detail', class_id=class_id)
+
+def assoc_instructor_delete(request, class_id, instructor_id):
+  Class.objects.get(id=class_id).instructors.remove(instructor_id)
+  return redirect('classes_detail', class_id=class_id)
+
 
 # ________ Sign Up Function __________
 
@@ -102,12 +113,12 @@ def signup(request):
 
 class ClassCreate(CreateView):
   model = Class
-  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructor']
+  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructors']
   success_url = '/classes/'
 
 class ClassUpdate(UpdateView):
   model = Class
-  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructor']
+  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructors']
   success_url = '/classes/'
 
 class ClassDelete(DeleteView):

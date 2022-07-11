@@ -25,8 +25,14 @@ urlpatterns = [
   path('classes/<int:class_id>/assoc_student/<int:student_id>/', views.assoc_student, name='assoc_student'),
   path('classes/<int:class_id>/assoc_student/<int:student_id>/delete/', views.assoc_student_delete, name='assoc_student_delete'),
 
+# add instructor to class?
+  path('classes/<int:class_id>/assoc_instructor/<int:instructor_id>/', views.assoc_instructor, name='assoc_instructor'),
+  path('classes/<int:class_id>/assoc_instructor/<int:instructor_id>/delete/', views.assoc_instructor_delete, name='assoc_instructor_delete'),
+# 
+
   path('students/<int:student_id>/assoc_class/<int:class_id>/', views.assoc_class, name='assoc_class'),
   path('students/<int:student_id>/assoc_class/<int:class_id>/delete/', views.assoc_class_delete, name='assoc_class_delete'),
+
 
   # ________ Students _________
 
