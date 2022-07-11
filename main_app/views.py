@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Class, Student, Photo
+from .models import Class, Student, Instructor, Photo
 
 import uuid
 import boto3
@@ -46,6 +46,19 @@ def students_detail(request, student_id):
     'student': student, 'classes': classes 
   })
 
+def instructors_index(request):
+  instructors = Instructor.objects.all()
+  # 
+  return render(request, 'instructors/index.html', { 'instructors': instructors })
+
+def instructors_detail(request, instructor_id):
+  instructor = Instructor.objects.get(id=instructor_id)
+  # classes = Class.objects.exclude(id__in=instructor.classes.all().values_list('id'))
+  return render(request, 'instructors/detail.html', {
+    'instructor': instructor
+    # 'instructor': instructor, 'classes': classes 
+  })
+
 # ________ Many-to-Many Associations __________
 
 def assoc_student(request, class_id, student_id):
@@ -63,6 +76,8 @@ def assoc_class(request, student_id, class_id):
 def assoc_class_delete(request, student_id, class_id):
   Student.objects.get(id=student_id).classes.remove(class_id)
   return redirect('students_detail', student_id=student_id)
+
+# Add Instructors Associatios Here
 
 # ________ Sign Up Function __________
 
@@ -116,4 +131,18 @@ class StudentDelete(DeleteView):
   success_url = '/students/'
 
 # ________ Class Declaration CRUD Functionality / Instructor __________
+
+class InstructorCreate(CreateView):
+  model = Instructor
+  fields = ['name', 'email', 'phone']
+  success_url = '/instructors/'
+
+class InstructorUpdate(UpdateView):
+  model = Instructor
+  fields = ['name', 'email', 'phone']
+  success_url = '/instructors/'
+
+class InstructorDelete(DeleteView):
+  model = Instructor
+  success_url = '/instructors/'
 

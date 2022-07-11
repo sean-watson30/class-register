@@ -30,17 +30,18 @@
   {% if student.classes.count %} {% for class in student.classes.all %}
   <div>
     <h4>{{ class.title }}</h4>
+    <p>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</p>
     <form
-      action="{% url 'assoc_class_delete' student.id class.id %}"
-      method="POST"
+    action="{% url 'assoc_class_delete' student.id class.id %}"
+    method="POST"
     >
-      {% csrf_token %}
-      <button type="submit">Remove</button>
-    </form>
-  </div>
-  {% endfor %} {% else %}
-  <h4>( Not Enrolled in Any Classes )</h4>
-  {% endif %}
+    {% csrf_token %}
+    <button type="submit">Remove</button>
+  </form>
+</div>
+{% endfor %} {% else %}
+<h4>( Not Enrolled in Any Classes )</h4>
+{% endif %}
 </div>
 <!-- Add Classes to this Student -->
 <div>
@@ -48,6 +49,7 @@
   {% if classes.count %} {% for class in classes.all %}
   <div>
     <h4>{{ class.title }}</h4>
+    <p>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</p>
     <form action="{% url 'assoc_class' student.id class.id %}" method="POST">
       {% csrf_token %}
       <button type="submit">Add</button>

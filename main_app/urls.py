@@ -4,6 +4,14 @@ from . import views
 urlpatterns = [
   path('', views.home, name='home'),
   path('about/', views.about, name='about'),
+
+  # ________ Instructors _________
+  path('instructors/', views.instructors_index, name='instructors_index'),
+  path('instructors/<int:instructor_id>', views.instructors_detail, name='instructors_detail'),
+  path('instructors/create/', views.InstructorCreate.as_view(), name='instructors_create'),
+  path('instructors/<int:pk>/update/', views.InstructorUpdate.as_view(), name='instructors_update'),
+  path('instructors/<int:pk>/delete/', views.InstructorDelete.as_view(), name='instructors_delete'),
+  
   # ________ Classes _________
 
   path('classes/', views.classes_index, name='classes_index'),

@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Instructors</h1>
+<a href="{% url 'instructors_create' %}">Add an Instructor</a>
+
+{% for instructor in instructors %}
+
+<div>
+  <a href="{% url 'instructors_detail' instructor.id %}">
+    <div>
+      <h4>{{ instructor.name }}</h4>
+    </div>
+  </a>
+</div>
+
+{% endfor %}
+
+{% endblock %}

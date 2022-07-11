@@ -31,6 +31,7 @@ class Class(models.Model):
   start_time = models.CharField(max_length=10)
   end_time = models.CharField(max_length=10)
   instructor = models.ForeignKey(User, on_delete=models.CASCADE)
+  # instructor = models.ManyToManyField(Instructor, related_name='classes')
   students = models.ManyToManyField(Student, related_name='classes')
   def __str__(self):
     return f"{self.title}"

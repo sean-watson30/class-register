@@ -21,6 +21,7 @@
       <li><a href="{% url 'about' %}">About</a></li>
       {% if user.is_authenticated %}
       <li><a href="{% url 'classes_index' %}">Classes</a></li>
+      <li><a href="{% url 'instructors_index' %}">Instructors</a></li>
       <li><a href="{% url 'students_index' %}">Students</a></li>
       <li><a href="{% url 'logout' %}">Logout</a></li>
       {% else %}
