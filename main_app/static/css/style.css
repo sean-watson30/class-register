@@ -1,3 +1,18 @@
 body {
   background-color: aqua;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.footer {
+  padding-top: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.footer-list {
+  list-style: none;
+  display: flex;
 }

@@ -1,6 +1,22 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load bootstrap5 %} {% block content %}
 
-<h1>Create an Account</h1>
+<div class="container">
+  <div class="row my-5">
+    <div class="col-md-12">
+      <h1>Create an Account</h1>
+      {% if error_message %}
+      <p>{{ error_message }}</p>
+      {% endif %}
+      <form action="{% url 'signup' %}" method="POST" class="form">
+        {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        {% endbuttons %}
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <h1>Create an Account</h1>
 
 {% if error_message %}
 <p>{{ error_message }}</p>
@@ -10,6 +26,6 @@
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Sign Up"/>
-</form>
+</form> -->
 
 {% endblock %}

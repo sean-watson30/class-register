@@ -1,10 +1,16 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+
   <title>Class Register</title>
   <link
       rel="stylesheet"
@@ -13,20 +19,34 @@
     />
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="/">( App Name Goes Here )</a></li>
-    </ul>
-    <ul>
-      <li><a href="{% url 'about' %}">About</a></li>
+  <nav class="navbar bg-light">
+    <div class="navbar-brand">
+      <a class="nav-link" href="/">( App Name Goes Here )</a>
+    </div>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">About</a>
+      </li>
       {% if user.is_authenticated %}
-      <li><a href="{% url 'classes_index' %}">Classes</a></li>
-      <li><a href="{% url 'instructors_index' %}">Instructors</a></li>
-      <li><a href="{% url 'students_index' %}">Students</a></li>
-      <li><a href="{% url 'logout' %}">Logout</a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'classes_index' %}">Classes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'instructors_index' %}">Instructors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'students_index' %}">Students</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
       {% else %}
-      <li><a href="{% url 'signup' %}">Sign Up</a></li>
-      <li><a href="{% url 'login' %}">Login</a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
       {% endif %}
     </ul>
   </nav>
@@ -35,8 +55,8 @@
     {% block content %} {% endblock %}
   </main>
 
-  <footer>
-    <ul>
+  <footer class="footer">
+    <ul class="footer-list">
       <li>&copy; 2022 Sean Watson | </li>
       <li><a href="https://github.com/sean-watson30">GitHub</a> | </li>
       <li><a href="https://www.linkedin.com/in/sean-watson30/">LinkedIn</a> </li>
