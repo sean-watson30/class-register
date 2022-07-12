@@ -1,18 +1,28 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Instructors</h1>
-<a href="{% url 'instructors_create' %}">Add an Instructor</a>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%">
+      <div class="card-body">
 
-{% for instructor in instructors %}
-
-<div>
-  <a href="{% url 'instructors_detail' instructor.id %}">
-    <div>
-      <h4>{{ instructor.name }}</h4>
+        <h1 class="card-title">Instructors</h1>
+        <a href="{% url 'instructors_create' %}">Add an Instructor</a>
+        <br>
+        {% for instructor in instructors %}
+        
+        <div class="card">
+          <a href="{% url 'instructors_detail' instructor.id %}">
+            <div class="card-body">
+              <span>{{ instructor.name }}</span>
+            </div>
+          </a>
+        </div>
+        <br>
+        
+        {% endfor %}
+      </div>
     </div>
-  </a>
+  </div>
 </div>
-
-{% endfor %}
 
 {% endblock %}

@@ -1,15 +1,28 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Instructor Detail</h1>
-<h4>{{ instructor.name }}</h4>
-<ul>
-  <li>{{ instructor.email }}</li>
-  <li>{{ instructor.phone }}</li>
-</ul>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%">
+      <div class="card-body">
 
-<div>
-  <a href="{% url 'instructors_update' instructor.id %}">Edit Instructor</a>
-  <a href="{% url 'instructors_delete' instructor.id %}">Delete Instructor</a>
+        <h1 class="card-title">{{ instructor.name }}</h1>
+        <div>
+          <a href="{% url 'instructors_update' instructor.id %}">Edit</a> | 
+          <a href="{% url 'instructors_delete' instructor.id %}">Delete</a>
+        </div>
+
+        <ul style="list-style: none;">
+          <li>email: {{ instructor.email }}</li>
+          <li>phone: {{ instructor.phone }}</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+
 
 {% endblock %}

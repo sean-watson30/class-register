@@ -6,8 +6,8 @@
         <!-- Display Class Details -->
         <h1 class="card-title">{{ class.title }}</h1>
         <div>
-          <a href="{% url 'classes_update' class.id %}">Edit Class</a> | 
-          <a href="{% url 'classes_delete' class.id %}">Delete Class</a>
+          <a href="{% url 'classes_update' class.id %}">Edit</a> | 
+          <a href="{% url 'classes_delete' class.id %}">Delete</a>
         </div>
 
         <div>
@@ -28,7 +28,11 @@
               method="POST"
             >
               {% csrf_token %}
-              <span>{{ student.name }} </span>
+              <span>
+                <a href="{% url 'students_detail' student.id %}">
+                  {{ student.name }} 
+                </a>
+              </span>
               <button type="submit" class="btn btn-outline-primary btn-sm">
                 -
               </button>
@@ -58,8 +62,10 @@
               method="POST"
             >
               {% csrf_token %}
-              <span style="margin-bottom: 5px"
-                >{{ student.name }}
+              <span style="margin-bottom: 5px">
+                <a href="{% url 'students_detail' student.id %}">
+                  {{ student.name }} 
+                </a>
                 <button type="submit" class="btn btn-outline-primary btn-sm">
                   +
                 </button>

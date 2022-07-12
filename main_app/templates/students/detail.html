@@ -18,7 +18,7 @@
             <div class="card">
               <div class="card-body">
                 <span>General / Contact Information</span>
-                <ul>
+                <ul style="list-style: none;">
                   <li>age: {{ student.age }}</li>
                   <li>email: {{ student.email }}</li>
                   <li>phone: {{ student.phone }}</li>
@@ -32,7 +32,7 @@
             <div class="card">
               <div class="card-body">
                 <span>Address</span>
-                <ul>
+                <ul style="list-style: none;">
                   <li>{{ student.address }}</li>
                   <li>{{ student.city }}, {{ student.state }}</li>
                   <li>{{ student.zip }}</li>
@@ -59,7 +59,11 @@
               method="POST"
               >
               {% csrf_token %}
-              <span>{{ class.title }}</span>
+              <span>
+                <a href="{% url 'classes_detail' class.id %}">
+                  {{ class.title }}
+                </a>
+              </span>
               <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
               <button type="submit" class="btn btn-outline-primary btn-sm">-</button>
             </form>
@@ -90,7 +94,11 @@
           <div>
             <form action="{% url 'assoc_class' student.id class.id %}" method="POST">
               {% csrf_token %}
-              <span>{{ class.title }}</span>
+              <span>
+                <a href="{% url 'classes_detail' class.id %}">
+                  {{ class.title }}
+                </a>
+              </span>
               <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
               <button type="submit" class="btn btn-outline-primary btn-sm">+</button>
             </form>
