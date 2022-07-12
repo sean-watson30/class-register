@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Student(models.Model):
   name = models.CharField(max_length=150)
-  email = models.CharField(max_length=200)
+  email = models.EmailField(max_length=200)
   phone = models.CharField(max_length=13)
   age = models.IntegerField()
   address = models.CharField(max_length=250)
@@ -21,7 +21,7 @@ class Student(models.Model):
 
 class Instructor(models.Model):
   name = models.CharField(max_length=150)
-  email = models.CharField(max_length=200)
+  email = models.EmailField(max_length=200)
   phone = models.CharField(max_length=13)
   # classes = models.ManyToManyField(Class, related_name='classes')
   def __str__(self):
@@ -35,8 +35,9 @@ class Class(models.Model):
   day_of_week = models.CharField(max_length=25)
   start_time = models.CharField(max_length=10)
   end_time = models.CharField(max_length=10)
-  # instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-  instructors = models.ManyToManyField(Instructor, related_name='classes')
+  instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
+  # instructors = models.CharField(max_length=150)
+  # instructors = models.ManyToManyField(Instructor, related_name='classes')
   students = models.ManyToManyField(Student, related_name='classes')
   def __str__(self):
     return f"{self.title}"

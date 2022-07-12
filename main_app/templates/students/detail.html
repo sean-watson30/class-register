@@ -6,15 +6,12 @@
     <div class="card" style="margin: 5%">
       <div class="card-body">
         <h1 class="card-title">{{ student.name }}</h1>
-
         <div>
           <a href="{% url 'students_update' student.id %}">Edit</a> | 
           <a href="{% url 'students_delete' student.id %}">Delete</a>
         </div>
-
         <div class="row">
           <div class="col">
-
             <div class="card">
               <div class="card-body">
                 <span>General / Contact Information</span>
@@ -25,10 +22,8 @@
                 </ul>
               </div>
             </div>
-
           </div>
           <div class="col">
-
             <div class="card">
               <div class="card-body">
                 <span>Address</span>
@@ -39,17 +34,11 @@
                 </ul>
               </div>
             </div>
-
           </div>
-
-
         </div>
-
         <hr>
-
         <!-- See / Remove Classes from this Student -->
         <div class="row">
-        
           <div>
             <h5>{{ student.name }}'s Classes</h5>
             {% if student.classes.count %} {% for class in student.classes.all %}
@@ -71,23 +60,18 @@
           {% endfor %} {% else %}
           <h6>( Not Enrolled in Any Classes )</h6>
           {% endif %}
-          </div>
-        
+          </div>        
         </div>
-
 
       </div>
     </div>
   </div>
 </div>
-
-
+<!-- Add Classes to this Student -->
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="card" style="margin: 5%">
       <div class="card-body">
-
-        <!-- Add Classes to this Student -->
         <div>
           <h5>Available Classes:</h5>
           {% if classes.count %} {% for class in classes.all %}
@@ -107,13 +91,9 @@
           <h6>( No Available Classes )</h6>
           {% endif %}
         </div>
-
       </div>
     </div>
   </div>
 </div>
-
-
-
 
 {% endblock %}

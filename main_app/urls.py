@@ -26,8 +26,12 @@ urlpatterns = [
   path('classes/<int:class_id>/assoc_student/<int:student_id>/delete/', views.assoc_student_delete, name='assoc_student_delete'),
 
 # add instructor to class?
-  path('classes/<int:class_id>/assoc_instructor/<int:instructor_id>/', views.assoc_instructor, name='assoc_instructor'),
-  path('classes/<int:class_id>/assoc_instructor/<int:instructor_id>/delete/', views.assoc_instructor_delete, name='assoc_instructor_delete'),
+  path('classes/<int:class_id>/assoc_instructor_to_class/<int:instructor_id>/', views.assoc_instructor_to_class, name='assoc_instructor_to_class'),
+  path('classes/<int:class_id>/assoc_instructor_to_class/<int:instructor_id>/delete/', views.assoc_instructor_to_class_delete, name='assoc_instructor_to_class_delete'),
+# 
+# add class to instructor?
+  # path('instructors/<int:instructor_id>/assoc_class_to_instructor/<int:class_id>/', views.assoc_class_to_instructor, name='assoc_class_to_instructor'),
+  # path('instructors/<int:instructor_id>/assoc_class_to_instructor_delete/<int:class_id>/delete', views.assoc_class_to_instructor_delete, name='assoc_class_to_instructor_delete'),
 # 
 
   path('students/<int:student_id>/assoc_class/<int:class_id>/', views.assoc_class, name='assoc_class'),

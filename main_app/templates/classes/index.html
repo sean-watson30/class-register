@@ -14,7 +14,8 @@
         <div class="card">
           <a href="{% url 'classes_detail' class.id %}" id="links">
             <div class="card-body">
-              <span>{{ class.title }} </span> <span>({{ class.day_of_week }} from {{ class.start_time }} - {{ class.end_time }} ) - {{ instructor.name }}</span>
+              <span>{{ class.title }} </span> 
+              <span>({{ class.day_of_week }} from {{ class.start_time }} - {{ class.end_time }}) {{ class.instructor }}</span>
             </div>
           </a>
         </div>

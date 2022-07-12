@@ -11,7 +11,12 @@
         </div>
 
         <div>
-          <h5>Instructor: {{ class.instructors }}</h5>
+          <h5>Instructor: 
+            <a href="{% url 'instructors_detail' class.instructor.id %}">
+              {{ class.instructor }}
+            </a>
+          </h5>
+          <!-- <h5>Instructor: </h5> -->
           <p>
             {{ class.day_of_week }} | {{ class.start_time }}pm - {{ class.end_time }}pm
           </p>

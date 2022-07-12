@@ -34,7 +34,8 @@ def classes_index(request):
 def classes_detail(request, class_id):
   classes = Class.objects.get(id=class_id)
   students = Student.objects.exclude(id__in=classes.students.all().values_list('id'))
-  instructor = Instructor.objects.exclude(id__in=classes.instructors.all().values_list('id'))
+  # instructor = Instructor.objects.exclude(id__in=classes.instructor.all().values_list('id'))
+  instructor = Instructor.objects.all()
   return render(request, 'classes/detail.html', {
     'class': classes, 'students': students, 'instructor': instructor
   })
@@ -61,10 +62,10 @@ def instructors_index(request):
 @login_required
 def instructors_detail(request, instructor_id):
   instructor = Instructor.objects.get(id=instructor_id)
-  classes = Class.objects.exclude(id__in=instructor.classes.all().values_list('id'))
+  # classes = Class.objects.exclude(id__in=instructor.classes.all().values_list('id'))
   return render(request, 'instructors/detail.html', {
-    # 'instructor': instructor
-    'instructor': instructor, 'classes': classes 
+    'instructor': instructor
+    # 'instructor': instructor, 'classes': classes 
   })
 
 # ________ Many-to-Many Associations __________
@@ -92,15 +93,24 @@ def assoc_class_delete(request, student_id, class_id):
 
 # Add Instructors Associatios Here
 @login_required
-def assoc_instructor(request, class_id, instructor_id):
+def assoc_instructor_to_class(request, class_id, instructor_id):
   Class.objects.get(id=class_id).instructors.add(instructor_id)
   return redirect('classes_detail', class_id=class_id)
 
 @login_required
-def assoc_instructor_delete(request, class_id, instructor_id):
+def assoc_instructor_to_class_delete(request, class_id, instructor_id):
   Class.objects.get(id=class_id).instructors.remove(instructor_id)
   return redirect('classes_detail', class_id=class_id)
 
+@login_required
+def assoc_class_to_instructor(request, instructor_id, class_id):
+  Instructor.objects.get(id=instructor_id).classes.add(class_id)
+  return redirect('instructors_detail', instructor_id=instructor_id)
+
+@login_required
+def assoc_class_to_instructor_delete(request, instructor_id, class_id):
+  Instructor.objects.get(id=instructor_id).classes.remove(class_id)
+  return redirect('instructors_detail', instructor_id=instructor_id)
 
 # ________ Sign Up Function __________
 
@@ -125,12 +135,12 @@ def signup(request):
 
 class ClassCreate(LoginRequiredMixin, CreateView):
   model = Class
-  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructors']
+  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructor']
   success_url = '/classes/'
 
 class ClassUpdate(LoginRequiredMixin, UpdateView):
   model = Class
-  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructors']
+  fields = ['title', 'studio', 'day_of_week', 'start_time', 'end_time', 'instructor']
   success_url = '/classes/'
 
 class ClassDelete(LoginRequiredMixin, DeleteView):

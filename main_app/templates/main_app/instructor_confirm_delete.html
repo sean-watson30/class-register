@@ -9,24 +9,10 @@
         {% csrf_token %} {% bootstrap_form form %} {% buttons %}
         <button type="submit" class="btn btn-danger">Delete</button>
         {% endbuttons %}
-        <a href="{% url 'instructors_detail' instructor.id %}"
-          >Return to Instructor</a
-        >
+        <a href="{% url 'instructors_detail' instructor.id %}">Return to Instructor</a>
       </form>
     </div>
   </div>
 </div>
-
-<!-- <h1>Delete Instructor?</h1>
-
-<h4>
-  Are you sure you want to delete {{ object.name }}?
-</h4>
-
-<form action="" method="POST">
-  {% csrf_token %}
-  <input type="submit" value="Delete"/>
-  <a href=" url 'instructors_detail' instructor.id ">Return to Instructor</a>
-</form> -->
 
 {% endblock %}

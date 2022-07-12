@@ -4,12 +4,10 @@
   <div class="row justify-content-md-center">
     <div class="card" style="margin: 5%">
       <div class="card-body">
-
         <h1 class="card-title">Instructors</h1>
         <a href="{% url 'instructors_create' %}">Add an Instructor</a>
         <br>
         {% for instructor in instructors %}
-        
         <div class="card">
           <a href="{% url 'instructors_detail' instructor.id %}">
             <div class="card-body">
@@ -18,7 +16,6 @@
           </a>
         </div>
         <br>
-        
         {% endfor %}
       </div>
     </div>
