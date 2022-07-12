@@ -1,15 +1,24 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Classes Index Page</h1>
-<a href="{% url 'classes_create' %}">Add a Class</a>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%">
+      <div class="card-body">
 
-{% for class in classes %}
-<div>
-  <a href="{% url 'classes_detail' class.id %}">
-    <div>
-      <h4>{{ class.title }}<span> ({{ class.day_of_week }} from {{ class.start_time }} - {{ class.end_time }} ) - {{ instructor.name }}</span></h4>
+        <h1 class="card-title">Classes Index Page</h1>
+        <a href="{% url 'classes_create' %}">Add a Class</a>
+    
+        {% for class in classes %}
+
+        <a href="{% url 'classes_detail' class.id %}">
+          <div class="card">
+            <h4>{{ class.title }}<span> ({{ class.day_of_week }} from {{ class.start_time }} - {{ class.end_time }} ) - {{ instructor.name }}</span></h4>
+          </div>
+        </a>
+        {% endfor %} 
+      </div>
     </div>
-  </a>
+  </div>
 </div>
 
-{% endfor %} {% endblock %}
+{% endblock %}
