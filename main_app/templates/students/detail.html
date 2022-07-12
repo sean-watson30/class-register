@@ -1,63 +1,111 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Student Details</h1>
+<!-- Display Student Details -->
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%">
+      <div class="card-body">
+        <h1 class="card-title">{{ student.name }}</h1>
 
-<div>
-  <div>
-    <h2>{{ student.name }}</h2>
-    <ul>
-      <li>age: {{ student.age }}</li>
-      <li>email: {{ student.email }}</li>
-      <li>phone: {{ student.phone }}</li>
-    </ul>
-    <ul>
-      <li>street address: {{ student.address }}</li>
-      <li>city: {{ student.city }}</li>
-      <li>state: {{ student.state }}</li>
-      <li>zip code: {{ student.zip }}</li>
-    </ul>
+        <div>
+          <a href="{% url 'students_update' student.id %}">Edit</a> | 
+          <a href="{% url 'students_delete' student.id %}">Delete</a>
+        </div>
 
-    <div>
-      <a href="{% url 'students_update' student.id %}">Edit</a>
-      <a href="{% url 'students_delete' student.id %}">Delete</a>
+        <div class="row">
+          <div class="col">
+
+            <div class="card">
+              <div class="card-body">
+                <span>General / Contact Information</span>
+                <ul>
+                  <li>age: {{ student.age }}</li>
+                  <li>email: {{ student.email }}</li>
+                  <li>phone: {{ student.phone }}</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="card">
+              <div class="card-body">
+                <span>Address</span>
+                <ul>
+                  <li>{{ student.address }}</li>
+                  <li>{{ student.city }}, {{ student.state }}</li>
+                  <li>{{ student.zip }}</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <hr>
+
+        <!-- See / Remove Classes from this Student -->
+        <div class="row">
+        
+          <div>
+            <h5>{{ student.name }}'s Classes</h5>
+            {% if student.classes.count %} {% for class in student.classes.all %}
+            <div>
+              <form
+              action="{% url 'assoc_class_delete' student.id class.id %}"
+              method="POST"
+              >
+              {% csrf_token %}
+              <span>{{ class.title }}</span>
+              <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
+              <button type="submit" class="btn btn-outline-primary btn-sm">-</button>
+            </form>
+          </div>
+          {% endfor %} {% else %}
+          <h6>( Not Enrolled in Any Classes )</h6>
+          {% endif %}
+          </div>
+        
+        </div>
+
+
+      </div>
     </div>
   </div>
 </div>
 
-<!-- See / Remove Classes from this Student -->
-<div>
-  <h2>{{ student.name }}'s Classes</h2>
-  {% if student.classes.count %} {% for class in student.classes.all %}
-  <div>
-    <h4>{{ class.title }}</h4>
-    <p>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</p>
-    <form
-    action="{% url 'assoc_class_delete' student.id class.id %}"
-    method="POST"
-    >
-    {% csrf_token %}
-    <button type="submit">Remove</button>
-  </form>
-</div>
-{% endfor %} {% else %}
-<h4>( Not Enrolled in Any Classes )</h4>
-{% endif %}
-</div>
-<!-- Add Classes to this Student -->
-<div>
-  <h3>Available Classes:</h3>
-  {% if classes.count %} {% for class in classes.all %}
-  <div>
-    <h4>{{ class.title }}</h4>
-    <p>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</p>
-    <form action="{% url 'assoc_class' student.id class.id %}" method="POST">
-      {% csrf_token %}
-      <button type="submit">Add</button>
-    </form>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%">
+      <div class="card-body">
+
+        <!-- Add Classes to this Student -->
+        <div>
+          <h5>Available Classes:</h5>
+          {% if classes.count %} {% for class in classes.all %}
+          <div>
+            <form action="{% url 'assoc_class' student.id class.id %}" method="POST">
+              {% csrf_token %}
+              <span>{{ class.title }}</span>
+              <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
+              <button type="submit" class="btn btn-outline-primary btn-sm">+</button>
+            </form>
+          </div>
+          {% endfor %} {% else %}
+          <h6>( No Available Classes )</h6>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
   </div>
-  {% endfor %} {% else %}
-  <h4>( No Available Classes )</h4>
-  {% endif %}
 </div>
+
+
+
 
 {% endblock %}

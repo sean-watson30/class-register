@@ -1,17 +1,27 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Student Index</h1>
-<a href="{% url 'students_create' %}">Add a Student</a>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%">
+      <div class="card-body">
+        <h1 class="card-title">Students</h1>
+        <a href="{% url 'students_create' %}">Add a Student</a>
+        <br />
 
-{% for student in students %}
-<!-- for student in object_list -->
+        {% for student in students %}
 
-<div>
-  <a href="{% url 'students_detail' student.id %}">
-    <span>{{ student.name }}</span>
-  </a>
+        <div class="card">
+          <a href="{% url 'students_detail' student.id %}">
+            <div class="card-body">
+              <span>{{ student.name }}</span>
+            </div>
+          </a>
+        </div>
+        <br />
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
-
-{% endfor %}
 
 {% endblock %}

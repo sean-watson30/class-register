@@ -5,16 +5,20 @@
     <div class="card" style="margin: 5%">
       <div class="card-body">
 
-        <h1 class="card-title">Classes Index Page</h1>
+        <h1 class="card-title">Classes</h1>
         <a href="{% url 'classes_create' %}">Add a Class</a>
+        <br>
     
         {% for class in classes %}
 
-        <a href="{% url 'classes_detail' class.id %}">
-          <div class="card">
-            <h4>{{ class.title }}<span> ({{ class.day_of_week }} from {{ class.start_time }} - {{ class.end_time }} ) - {{ instructor.name }}</span></h4>
-          </div>
-        </a>
+        <div class="card">
+          <a href="{% url 'classes_detail' class.id %}" id="links">
+            <div class="card-body">
+              <span>{{ class.title }} </span> <span>({{ class.day_of_week }} from {{ class.start_time }} - {{ class.end_time }} ) - {{ instructor.name }}</span>
+            </div>
+          </a>
+        </div>
+        <br>
         {% endfor %} 
       </div>
     </div>

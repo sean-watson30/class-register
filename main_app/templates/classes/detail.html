@@ -3,51 +3,71 @@
   <div class="row justify-content-md-center">
     <div class="card" style="margin: 5%">
       <div class="card-body">
-<!-- Display Class Details -->
-        <h1 class="card-title">Class Details</h1>
+        <!-- Display Class Details -->
+        <h1 class="card-title">{{ class.title }}</h1>
+        <div>
+          <a href="{% url 'classes_update' class.id %}">Edit Class</a> | 
+          <a href="{% url 'classes_delete' class.id %}">Delete Class</a>
+        </div>
 
         <div>
-          <h5>
-            {{ class.title }}, Instructor: {{ class.instructors }}
-          </h5>
-          <p>{{ class.day_of_week }} | {{ class.start_time }}pm - {{ class.end_time }}pm</p>
+          <h5>Instructor: {{ class.instructors }}</h5>
+          <p>
+            {{ class.day_of_week }} | {{ class.start_time }}pm - {{ class.end_time }}pm
+          </p>
           <p>Studio: {{ class.studio }}</p>
-          <div>
-            <a href="{% url 'classes_update' class.id %}">Edit Class</a>
-            <a href="{% url 'classes_delete' class.id %}">Delete Class</a>
-          </div>
         </div>
-        <hr>
-<!-- See / Remove Students from this Class -->
+        <hr />
+        <!-- See / Remove Students from this Class -->
         <div>
           <h5>Students enrolled in {{ class.title }}</h5>
           {% if class.students.count %} {% for student in class.students.all %}
           <div>
-            <form action="{% url 'assoc_student_delete' class.id student.id %}" method="POST">
+            <form
+              action="{% url 'assoc_student_delete' class.id student.id %}"
+              method="POST"
+            >
               {% csrf_token %}
-              <span>{{ student.name }}  </span>
-              <button type="submit" class="btn btn-outline-primary btn-sm">Remove</button>
+              <span>{{ student.name }} </span>
+              <button type="submit" class="btn btn-outline-primary btn-sm">
+                -
+              </button>
             </form>
           </div>
           {% endfor %} {% else %}
-          <h5>( No Students Currently Enrolled )</h5>
+          <h6>( No Students Currently Enrolled )</h6>
           {% endif %}
         </div>
-<!-- Add Students to this Class -->
-        <hr>
+        <!-- Add Students to this Class -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%">
+      <div class="card-body">
         <div>
           <h5>Students Not Enrolled:</h5>
+          <hr />
           {% if students.count %} {% for student in students.all %}
           <div>
-            <form action="{% url 'assoc_student' class.id student.id %}" method="POST">
+            <form
+              action="{% url 'assoc_student' class.id student.id %}"
+              method="POST"
+            >
               {% csrf_token %}
-              <span style="margin-bottom: 5px;">{{ student.name }}  
-                <button type="submit" class="btn btn-outline-primary btn-sm">Add</button>
+              <span style="margin-bottom: 5px"
+                >{{ student.name }}
+                <button type="submit" class="btn btn-outline-primary btn-sm">
+                  +
+                </button>
               </span>
             </form>
           </div>
           {% endfor %} {% else %}
-          <h5>( No Available Students )</h5>
+          <h6>( No Available Students )</h6>
           {% endif %}
         </div>
       </div>
