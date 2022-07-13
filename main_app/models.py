@@ -62,4 +62,4 @@ class Photo(models.Model):
   student = models.ForeignKey(Student, on_delete=models.CASCADE)
   # instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
   def __str__(self):
-    return "this is a photo."
+    return f"photo for student_id: {self.student_id} @{self.url}"
