@@ -1,18 +1,30 @@
 {% extends 'base.html' %} {% load bootstrap5 %} {% block content %}
 
+
 <div class="container">
-  <div class="row my-5">
-    <div class="col-md-12">
-      <h1>Delete Class?</h1>
-      <h4>Are you sure you want to delete {{ object.title }}?</h4>
-      <form action="" method="POST" class="form">
-        {% csrf_token %} {% bootstrap_form form %} {% buttons %}
-        <button type="submit" class="btn btn-danger">Delete</button>
-        {% endbuttons %}
-        <a href="{% url 'classes_detail' class.id %}">Return to Class</a>
-      </form>
+  <div class="row justify-content-md-center">
+    <div class="card" style="margin: 5%; background-color: #DCD7C9;">
+      <div class="card-body">
+
+        <div class="container">
+          <div class="row my-5">
+            <div class="col-md-12">
+              <h1>Delete Class</h1>
+              <h4>Are you sure you want to delete {{ object.title }}?</h4>
+              <form action="" method="POST" class="form">
+                {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                {% endbuttons %}
+                <a href="{% url 'classes_detail' class.id %}" style="color: #576F72">Return to Class</a>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
   </div>
 </div>
+
 
 {% endblock %}

@@ -1,6 +1,6 @@
 body {
   min-height: 100vh;
-  background-color: rgb(200, 209, 209);
+  background-image: linear-gradient(to bottom right, #7D9D9C, #2C3639 );
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
@@ -8,20 +8,19 @@ body {
 
 main {
   flex: 1 0 auto;
-  /* background-image: linear-gradient(to bottom right, white, black ); */
-  /* background-image: linear-gradient(to bottom right, #7D9D9C, #576F72 ); */
-  background-image: linear-gradient(to bottom right, #7D9D9C, #2C3639 );
+  background-image: url(https://images.pexels.com/photos/10640460/pexels-photo-10640460.jpeg?cs=srgb&dl=pexels-cottonbro-10640460.jpg&fm=jpg);
+  /* background-image: url(./main_app/static/photos/background.jpg); */
+  /* background-image: url(main_app/static/photos/background.jpg); */
+  background-size: cover;
+  background-position: center;
 }
 
 .footer {
-  /* background-color: #0c4eb1; */
   padding-top: 0;
   text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* position: bottom; */
-  /* text-align: center; */
 }
 
 
@@ -33,15 +32,12 @@ main {
 a:link {
   text-decoration: none;
 }
-
 a:visited {
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
-
 a:active {
   text-decoration: underline;
 }
