@@ -8,11 +8,13 @@ body {
 
 main {
   flex: 1 0 auto;
-  background-image: linear-gradient(to bottom right, white, black );
+  /* background-image: linear-gradient(to bottom right, white, black ); */
+  /* background-image: linear-gradient(to bottom right, #7D9D9C, #576F72 ); */
+  background-image: linear-gradient(to bottom right, #7D9D9C, #2C3639 );
 }
 
 .footer {
-  background-color: #0c4eb1;
+  /* background-color: #0c4eb1; */
   padding-top: 0;
   text-align: center;
   display: flex;

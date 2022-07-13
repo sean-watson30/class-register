@@ -3,17 +3,17 @@
 <!-- Display Student Details -->
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card" style="margin: 5%">
+    <div class="card" style="margin: 5%; background-color: #DCD7C9;">
       <div class="card-body">
         <h1 class="card-title">{{ student.name }}</h1>
         <div>
-          <a href="{% url 'students_update' student.id %}">Edit</a> | 
-          <a href="{% url 'students_delete' student.id %}">Delete</a>
+          <a href="{% url 'students_update' student.id %}" style="color: #576F72">Edit</a> | 
+          <a href="{% url 'students_delete' student.id %}" style="color: #576F72">Delete</a>
         </div>
         <!-- Photo Addition / Display -->
         <div class="row">
           <div class="col-6">
-            <div class="card">
+            <div class="card" style="background-color: #DCD7C9;">
               <div class="card-body">
                 <span>General / Contact Information</span>
                 <ul style="list-style: none;">
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="col-4 offset-1">
-            <div class="card">
+            <div class="card" style="background-color: #DCD7C9;">
               {% for photo in student.photo_set.all %}
               <img src="{{ photo.url }}" class="card-img-top" alt="{{ student.name }}">
               {% empty %}
@@ -36,7 +36,7 @@
         </div>
           <div class="row">
             <div class="col-6">
-              <div class="card">
+              <div class="card" style="background-color: #DCD7C9;">
                 <div class="card-body">
                   <span>Address</span>
                   <ul style="list-style: none;">
@@ -55,7 +55,7 @@
               >
               {% csrf_token %}
               <input type="file" name="photo-file">
-              <input type="submit" class="btn btn-outline-primary" value="Upload Photo" />
+              <input type="submit" class="btn btn-outline-success" value="Upload Photo" />
             </form>     
           </div>
         </div>
@@ -72,8 +72,8 @@
               >
               {% csrf_token %}
               <span>
-                <button type="submit" class="btn btn-outline-primary btn-sm">-</button>
-                <a href="{% url 'classes_detail' class.id %}">
+                <button type="submit" class="btn btn-outline-danger btn-sm">-</button>
+                <a href="{% url 'classes_detail' class.id %}" style="color: #576F72">
                   {{ class.title }}
                 </a>
                 <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
@@ -92,7 +92,7 @@
 <!-- Add Classes to this Student -->
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card" style="margin: 5%">
+    <div class="card" style="margin: 5%; background-color: #DCD7C9;">
       <div class="card-body">
         <div>
           <h5>Available Classes:</h5>
@@ -101,8 +101,8 @@
             <form action="{% url 'assoc_class' student.id class.id %}" method="POST">
               {% csrf_token %}
               <span>
-                <button type="submit" class="btn btn-outline-primary btn-sm">+</button>
-                <a href="{% url 'classes_detail' class.id %}">
+                <button type="submit" class="btn btn-outline-success btn-sm">+</button>
+                <a href="{% url 'classes_detail' class.id %}" style="color: #576F72">
                   {{ class.title }}
                 </a>
                 <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>

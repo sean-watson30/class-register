@@ -2,12 +2,12 @@
 
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card" style="margin: 5%">
+    <div class="card" style="margin: 5%; background-color: #DCD7C9;">
       <div class="card-body">
         <h1 class="card-title">{{ instructor.name }}</h1>
         <div>
-          <a href="{% url 'instructors_update' instructor.id %}">Edit</a> | 
-          <a href="{% url 'instructors_delete' instructor.id %}">Delete</a>
+          <a href="{% url 'instructors_update' instructor.id %}" style="color: #576F72">Edit</a> | 
+          <a href="{% url 'instructors_delete' instructor.id %}" style="color: #576F72">Delete</a>
         </div>
         <ul style="list-style: none;">
           <li>email: {{ instructor.email }}</li>

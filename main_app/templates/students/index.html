@@ -2,15 +2,15 @@
 
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card" style="margin: 5%">
+    <div class="card" style="margin: 5%; background-color: #DCD7C9;">
       <div class="card-body">
         <h1 class="card-title">Students</h1>
-        <a href="{% url 'students_create' %}">Add a Student</a>
+        <a href="{% url 'students_create' %}" style="color: #576F72">Add a Student</a>
         <br />
 
         {% for student in students %}
-        <div class="card">
-          <a href="{% url 'students_detail' student.id %}">
+        <div class="card" style="background-color: #DCD7C9;">
+          <a href="{% url 'students_detail' student.id %}" style="color: #576F72">
             <div class="card-body">
               <span>{{ student.name }}</span>
             </div>

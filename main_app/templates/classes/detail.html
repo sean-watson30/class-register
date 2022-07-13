@@ -1,18 +1,19 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card" style="margin: 5%">
+    <!-- <div class="card" style="margin: 5%; background-color: #F0EBE3;"> -->
+    <div class="card" style="margin: 5%; background-color: #DCD7C9;">
       <div class="card-body">
         <!-- Display Class Details -->
         <h1 class="card-title">{{ class.title }}</h1>
         <div>
-          <a href="{% url 'classes_update' class.id %}">Edit</a> | 
-          <a href="{% url 'classes_delete' class.id %}">Delete</a>
+          <a href="{% url 'classes_update' class.id %}" style="color: #576F72">Edit</a> | 
+          <a href="{% url 'classes_delete' class.id %}" style="color: #576F72">Delete</a>
         </div>
 
         <div>
           <h5>Instructor: 
-            <a href="{% url 'instructors_detail' class.instructor.id %}">
+            <a href="{% url 'instructors_detail' class.instructor.id %}" style="color: #576F72">
               {{ class.instructor }}
             </a>
           </h5>
@@ -34,10 +35,10 @@
             >
               {% csrf_token %}
               <span>
-                <button type="submit" class="btn btn-outline-primary btn-sm">
+                <button type="submit" class="btn btn-outline-danger btn-sm">
                   -
                 </button>
-                <a href="{% url 'students_detail' student.id %}">
+                <a href="{% url 'students_detail' student.id %}" style="color: #576F72">
                   {{ student.name }} 
                 </a>
               </span>
@@ -55,7 +56,7 @@
 
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card" style="margin: 5%">
+    <div class="card" style="margin: 5%; background-color: #DCD7C9;">
       <div class="card-body">
         <div>
           <h5>Students Not Enrolled:</h5>
@@ -68,10 +69,10 @@
             >
               {% csrf_token %}
               <span style="margin-bottom: 5px">
-                <button type="submit" class="btn btn-outline-primary btn-sm">
+                <button type="submit" class="btn btn-outline-success btn-sm">
                   +
                 </button>
-                <a href="{% url 'students_detail' student.id %}">
+                <a href="{% url 'students_detail' student.id %}" style="color: #576F72">
                   {{ student.name }} 
                 </a>
               </span>
