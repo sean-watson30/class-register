@@ -18,8 +18,8 @@ S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'class-register'
 
 # Create your views here.
-def home(request):
-  return render(request, 'home.html')
+# def home(request):
+#   return render(request, 'home.html')
 
 def about(request):
   return render(request, 'about.html')
