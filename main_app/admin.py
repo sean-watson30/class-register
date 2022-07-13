@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Class, Student, Instructor
+from .models import Class, Student, Instructor, Photo
 
 # Register your models here.
 admin.site.register(Class)
 admin.site.register(Student)
 admin.site.register(Instructor)
+admin.site.register(Photo)

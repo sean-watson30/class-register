@@ -10,8 +10,9 @@
           <a href="{% url 'students_update' student.id %}">Edit</a> | 
           <a href="{% url 'students_delete' student.id %}">Delete</a>
         </div>
+        <!-- Photo Addition / Display -->
         <div class="row">
-          <div class="col">
+          <div class="col-6">
             <div class="card">
               <div class="card-body">
                 <span>General / Contact Information</span>
@@ -23,17 +24,39 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col-4 offset-1">
             <div class="card">
-              <div class="card-body">
-                <span>Address</span>
-                <ul style="list-style: none;">
-                  <li>{{ student.address }}</li>
-                  <li>{{ student.city }}, {{ student.state }}</li>
-                  <li>{{ student.zip }}</li>
-                </ul>
+              {% for photo in student.photo_set.all %}
+              <img src="{{ photo.url }}" class="card-img-top" alt="{{ student.name }}">
+              {% empty %}
+              <div>No Photo</div>
+              {% endfor %}            
+            </div>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="card">
+                <div class="card-body">
+                  <span>Address</span>
+                  <ul style="list-style: none;">
+                    <li>{{ student.address }}</li>
+                    <li>{{ student.city }}, {{ student.state }}</li>
+                    <li>{{ student.zip }}</li>
+                  </ul>
+                </div>
               </div>
             </div>
+            <div class="col-4 offset-1">
+              <form 
+              action="{% url 'add_photo' student.id %}" 
+              method="POST"
+              enctype="multipart/form-data"
+              >
+              {% csrf_token %}
+              <input type="file" name="photo-file">
+              <input type="submit" class="btn btn-outline-primary" value="Upload Photo" />
+            </form>     
           </div>
         </div>
         <hr>
@@ -49,12 +72,12 @@
               >
               {% csrf_token %}
               <span>
+                <button type="submit" class="btn btn-outline-primary btn-sm">-</button>
                 <a href="{% url 'classes_detail' class.id %}">
                   {{ class.title }}
                 </a>
+                <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
               </span>
-              <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
-              <button type="submit" class="btn btn-outline-primary btn-sm">-</button>
             </form>
           </div>
           {% endfor %} {% else %}
@@ -62,7 +85,6 @@
           {% endif %}
           </div>        
         </div>
-
       </div>
     </div>
   </div>
@@ -79,12 +101,12 @@
             <form action="{% url 'assoc_class' student.id class.id %}" method="POST">
               {% csrf_token %}
               <span>
+                <button type="submit" class="btn btn-outline-primary btn-sm">+</button>
                 <a href="{% url 'classes_detail' class.id %}">
                   {{ class.title }}
                 </a>
+                <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
               </span>
-              <span>{{ class.day_of_week }}, {{ class.start_time }}pm - {{ class.end_time }}pm</span>
-              <button type="submit" class="btn btn-outline-primary btn-sm">+</button>
             </form>
           </div>
           {% endfor %} {% else %}

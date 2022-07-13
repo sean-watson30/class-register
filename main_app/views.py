@@ -14,7 +14,8 @@ from .models import Class, Student, Instructor, Photo
 import uuid
 import boto3
 
-
+S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
+BUCKET = 'class-register'
 
 # Create your views here.
 def home(request):
@@ -129,7 +130,21 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 # ________ Photo Handling __________
-
+@login_required
+def add_photo(request, student_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, student_id=student_id)
+      photo.save()
+    except Exception as error:
+      print('An error occurred uploading file to S3', error)
+      return redirect('students_detail', student_id=student_id)
+  return redirect('students_detail', student_id=student_id)    
 
 # ________ Class Declaration CRUD Functionality / Classes __________
 

@@ -37,6 +37,10 @@ urlpatterns = [
   path('students/<int:student_id>/assoc_class/<int:class_id>/', views.assoc_class, name='assoc_class'),
   path('students/<int:student_id>/assoc_class/<int:class_id>/delete/', views.assoc_class_delete, name='assoc_class_delete'),
 
+  # ________ Photo Handling _________
+
+  path('students/<int:student_id>/add_photo/', views.add_photo, name='add_photo'),
+  # path('instructors/<int:instructor_id>/add_photo/', views.add_photo, name='add_photo'),
 
   # ________ Students _________
 

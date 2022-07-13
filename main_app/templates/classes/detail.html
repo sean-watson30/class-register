@@ -34,13 +34,13 @@
             >
               {% csrf_token %}
               <span>
+                <button type="submit" class="btn btn-outline-primary btn-sm">
+                  -
+                </button>
                 <a href="{% url 'students_detail' student.id %}">
                   {{ student.name }} 
                 </a>
               </span>
-              <button type="submit" class="btn btn-outline-primary btn-sm">
-                -
-              </button>
             </form>
           </div>
           {% endfor %} {% else %}
@@ -68,12 +68,12 @@
             >
               {% csrf_token %}
               <span style="margin-bottom: 5px">
-                <a href="{% url 'students_detail' student.id %}">
-                  {{ student.name }} 
-                </a>
                 <button type="submit" class="btn btn-outline-primary btn-sm">
                   +
                 </button>
+                <a href="{% url 'students_detail' student.id %}">
+                  {{ student.name }} 
+                </a>
               </span>
             </form>
           </div>
